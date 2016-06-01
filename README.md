@@ -8,7 +8,7 @@ Header-only library providing smart `cmp` function for C++11.
 #include "cmp.hpp"
 ```
 
-```
+```cpp
 using namespace cppcmp;
 // cppcmp::cmp
 assert(-1 == cmp(-3, 5));
