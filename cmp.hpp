@@ -1,4 +1,5 @@
 #ifndef CPP_CMP_HEADER
+#define CPP_CMP_HEADER
 
 #if __cplusplus < 201103L
 #error "this header require C++11 support of your compiler"
