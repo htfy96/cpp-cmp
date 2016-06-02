@@ -1,4 +1,4 @@
-# Cpp-cmp
+# Cpp-cmp ![test status](https://travis-ci.org/htfy96/cpp-cmp.svg?branch=master)
 
 Header-only library providing smart `cmp` function for C++11.
 

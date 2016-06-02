@@ -1,0 +1,11 @@
+language: cpp
+before_install:
+    - git submodule update --init --recursive
+    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+    - sudo apt-get -qq update
+    - sudo apt-get install gcc-5 g++-5 -y
+    - export CXX="g++-5" CC="gcc-5"
+script:
+    - $CXX -std=c++11 -Wall -Wextra -Werror test.cpp -o test
+    - ./test
+    
