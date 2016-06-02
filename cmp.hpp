@@ -28,6 +28,7 @@
 
 #include <tuple>
 #include <functional>
+#include <cstddef>
 
 namespace cppcmp
 {
