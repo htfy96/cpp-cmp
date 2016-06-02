@@ -28,7 +28,7 @@ assert(0 == cmp( std::forward_as_tuple(x.size(), x),
 struct user_defined_type
 {
     // ...
-    // User defined type should provide < and ==
+    // User defined type could provide < and ==
     bool operator<(const user_defined_type& other) const
     {
         return x_ < other.x_;
