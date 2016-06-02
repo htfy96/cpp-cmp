@@ -6,6 +6,6 @@ before_install:
     - sudo apt-get install gcc-5 g++-5 -y
     - export CXX="g++-5" CC="gcc-5"
 script:
-    - $CXX -std=c++11 -Wall -Wextra -Werror test.cpp -o test
+    - $CXX -std=c++11 -O2 -Wall -Wextra -Werror test.cpp -o test
     - ./test
     

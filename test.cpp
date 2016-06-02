@@ -76,10 +76,99 @@ void test_user_defined_type()
 }
 
 
+namespace
+{
+    template<typename T>
+        struct user_defined_type_nontemplate_cmp
+    {
+        T x_;
+        user_defined_type_nontemplate_cmp(const T& x): x_(x)
+        {
+        }
+    };
+}
+
+namespace cppcmp
+{
+    template<typename T>
+        int cmp(const user_defined_type_nontemplate_cmp<T>& a,
+                    const user_defined_type_nontemplate_cmp<T>& b)
+        {
+            return cppcmp::cmp(a.x_, b.x_);
+        }
+}
+
+void test_nontemplate_cmp()
+{
+    using namespace cppcmp;
+    user_defined_type_nontemplate_cmp<int> a(20), b(-10);
+    ASSERT_EQ(1, cmp(a, b));
+}
+
+namespace
+{
+    struct precedence_tester
+    {
+        bool operator<(const precedence_tester&) const
+        {
+            return false;
+        }
+        bool operator==(const precedence_tester&) const
+        {
+            return true;
+        }
+
+        int cmp(const precedence_tester&) const
+        {
+            return 10;
+        }
+    };
+
+    struct precedence_tester2
+    {
+        bool operator<(const precedence_tester2&) const
+        {
+            return false;
+        }
+        bool operator==(const precedence_tester2&) const
+        {
+            return true;
+        }
+
+        int cmp(const precedence_tester2&) const
+        {
+            return 10;
+        }
+    };
+}
+
+namespace cppcmp
+{
+    int cmp(const precedence_tester& a, const precedence_tester &b)
+    {
+        (void) (a); 
+        (void) (b);
+        return -10;
+    }
+}
+
+void test_precedence()
+{
+    using namespace cppcmp;
+    precedence_tester a, b;
+    ASSERT_EQ(-10, cmp(a, b));
+
+    precedence_tester2 c, d;
+    ASSERT_EQ(10, cmp(c, d));
+}
+
+
 int main()
 {
     test_simple_type();
     test_tuple();
     test_user_defined_type();
+    test_nontemplate_cmp();
+    test_precedence();
 }
 

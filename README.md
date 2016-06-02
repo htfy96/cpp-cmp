@@ -46,8 +46,7 @@ assert(1 == cmp(a, b));
 struct user_defined_type_cmp
 {
     // ...
-    // you can also provide 'cmp' member function, which
-    // will have highest priority
+    // you can also provide 'cmp' member function
     int cmp(const user_defined_type_cmp& other) const
     {
         if (x_ == other.x_) return 0;
@@ -56,7 +55,21 @@ struct user_defined_type_cmp
 };
 user_defined_type_cmp c(-10), d(42);
 assert(-1, cmp(c, d));
+
+
+namespace cppcmp
+{
+    // Also, you can directly provide cmp in cppcmp namespace
+    int cmp(const vector<int>& a, const vector<int>& b)
+    {
+        return cmp(a.size(), b.size());
+    }
+}
 ```
+
+### Precedence
+
+overrided `cppcmp::cmp` > member function `cmp` > `operator <` + `operator ==`
 
 ## License
 
