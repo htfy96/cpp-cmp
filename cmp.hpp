@@ -47,7 +47,7 @@ namespace cppcmp
                     auto t = cmp(std::get<pos>(a), std::get<pos>(b));
                     if (t == 0) 
                     {
-                        unified_tuple_comparator<remain - 1, Args...> next;
+                        const unified_tuple_comparator<remain - 1, Args...> next;
                         return next(a, b);
                     } else {
                         return t;
